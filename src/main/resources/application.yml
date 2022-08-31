@@ -1,0 +1,25 @@
+server:
+  port: 9090
+
+spring:
+  jpa:
+    database: 'MYSQL'
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: none
+      jdbc:
+        lob:
+        non_contextual_creation: true
+  datasource:
+    url: 'jdbc:mysql://localhost:3306/lab'
+    username: 'root'
+    password: 'BSDI2022furfaro'
+  sql:
+    init:
+      platform: 'mysql'
+keycloak:
+  auth-server-url: 'http://localhost:8080/auth'
+  realm: 'serverbb'
+  resource: 'login-app'
+  public-client: 'true'
