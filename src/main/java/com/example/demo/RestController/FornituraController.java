@@ -22,7 +22,6 @@ public class FornituraController {
     public ResponseEntity findAll(){
         return new ResponseEntity<>(fs.findAll(), HttpStatus.OK);
     }
-
     @PostMapping("/admin/add-fornitura")
     public ResponseEntity addFornitura(@RequestParam String piva, @RequestBody ArrayProdotti prodotti){
         List<Fornitura> tr = null;
@@ -32,6 +31,11 @@ public class FornituraController {
             return new ResponseEntity<>(new ResponseMessage(e.getMessage()), HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(tr, HttpStatus.OK);
+    }
+    @DeleteMapping("/admin/delete-fornitura")
+    public ResponseEntity deleteFornitua(@RequestBody ArrayProdotti prod, @RequestParam String piva){
+        fs.deleteFornitura(prod.prodotti, piva);
+        return new ResponseEntity<>(new ResponseMessage("Cancellazione avvenuta con successo"), HttpStatus.OK);
     }
 
 }

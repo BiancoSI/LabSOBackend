@@ -29,4 +29,19 @@ public class FornitoreController {
         }
         return new ResponseEntity<>(fo, HttpStatus.OK);
     }
+    @DeleteMapping("/admin/delete/{piva}")
+    public ResponseEntity deleteFornitore(@PathVariable String piva){
+        fs.deleteFornitore(piva);
+        return new ResponseEntity<>(new ResponseMessage("Cancellazione avvenuta con successo"), HttpStatus.OK);
+    }
+    @PutMapping("/admin/modify")
+    public ResponseEntity modifySupplier(@RequestBody Fornitore f){
+        Fornitore ret = null;
+        try {
+            ret = fs.modificaFornitore(f.getPiva(), f);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ResponseMessage(e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(ret, HttpStatus.OK);
+    }
 }
