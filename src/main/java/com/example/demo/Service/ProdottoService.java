@@ -26,6 +26,7 @@ public class ProdottoService {
 
     @Transactional
     public void deleteProdotto(long id){
+        fornituraRepository.deleteByPk_Id(id);
         pr.deleteById(id);
     }
 

@@ -9,17 +9,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/admin")
 public class FornitoreController {
     @Autowired
     private FornitoreService fs;
 
-    @GetMapping("/admin/fornitori")
+    @GetMapping("/fornitore")
     public ResponseEntity  findAll(){
         return new ResponseEntity<>(fs.findAll(), HttpStatus.OK);
     }
 
-    @PostMapping("/admin/add-fornitore")
+    @PostMapping("/add-fornitore")
     public ResponseEntity addNewFornitore(@RequestBody Fornitore f){
         Fornitore fo = null;
         try {
@@ -29,12 +29,12 @@ public class FornitoreController {
         }
         return new ResponseEntity<>(fo, HttpStatus.OK);
     }
-    @DeleteMapping("/admin/delete/{piva}")
-    public ResponseEntity deleteFornitore(@PathVariable String piva){
+    @DeleteMapping("/delete-fornitore")
+    public ResponseEntity deleteFornitore(@RequestParam String piva){
         fs.deleteFornitore(piva);
         return new ResponseEntity<>(new ResponseMessage("Cancellazione avvenuta con successo"), HttpStatus.OK);
     }
-    @PutMapping("/admin/modify")
+    @PutMapping("/modify-fornitore")
     public ResponseEntity modifySupplier(@RequestBody Fornitore f){
         Fornitore ret = null;
         try {

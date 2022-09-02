@@ -13,16 +13,21 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/admin")
 public class FornituraController {
     @Autowired
     private FornituraService fs;
 
-    @GetMapping("/admin/forniture")
+    @GetMapping("/fornitura")
     public ResponseEntity findAll(){
         return new ResponseEntity<>(fs.findAll(), HttpStatus.OK);
     }
-    @PostMapping("/admin/add-fornitura")
+
+    @GetMapping("/fornitura/get")
+    public List<Fornitura> findByPiva(@RequestParam String piva){
+        return fs.findByPiva(piva);
+    }
+    @PostMapping("/add-fornitura")
     public ResponseEntity addFornitura(@RequestParam String piva, @RequestBody ArrayProdotti prodotti){
         List<Fornitura> tr = null;
         try {
@@ -32,7 +37,7 @@ public class FornituraController {
         }
         return new ResponseEntity<>(tr, HttpStatus.OK);
     }
-    @DeleteMapping("/admin/delete-fornitura")
+    @DeleteMapping("/delete-fornitura")
     public ResponseEntity deleteFornitua(@RequestBody ArrayProdotti prod, @RequestParam String piva){
         fs.deleteFornitura(prod.prodotti, piva);
         return new ResponseEntity<>(new ResponseMessage("Cancellazione avvenuta con successo"), HttpStatus.OK);

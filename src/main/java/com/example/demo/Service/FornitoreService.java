@@ -43,6 +43,7 @@ public class FornitoreService {
 
     @Transactional
     public void deleteFornitore(String piva) {
+        ffr.deleteByPk_Piva(piva);
         fr.deleteById(piva);
     }
 

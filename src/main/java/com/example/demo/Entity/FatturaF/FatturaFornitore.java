@@ -16,6 +16,7 @@ import java.util.Date;
 @ToString
 public class FatturaFornitore implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long Id;
 
     @Column(name = "data")

@@ -11,30 +11,30 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/admin")
 public class ProdottoController {
     @Autowired
     private ProdottoService ps;
 
-    @GetMapping("/admin/prodotti")
+    @GetMapping("/prodotto")
     public List<Prodotto> findAll(){
         return ps.findAll();
     }
 
-    @PostMapping("/admin/add-prodotto")
+    @PostMapping("/add-prodotto")
     public ResponseEntity addProdotto(@RequestBody Prodotto p){
         Prodotto ret = null;
         ret = ps.addProdotto(p);
         return new ResponseEntity<>(ret, HttpStatus.OK);
     }
 
-    @DeleteMapping("/admin/delete-prodotto/{id}")
-    public ResponseEntity deleteProdotto(@PathVariable long id){
+    @DeleteMapping("/delete-prodotto")
+    public ResponseEntity deleteProdotto(@RequestParam long id){
         ps.deleteProdotto(id);
         return new ResponseEntity<>(new ResponseMessage("Cancellazione Avvenuta"), HttpStatus.OK);
     }
 
-    @PutMapping("/admin/modify-prodotto")
+    @PutMapping("/modify-prodotto")
     public ResponseEntity modifyProdotto(@RequestBody Prodotto p){
         Prodotto ret = null;
         try {

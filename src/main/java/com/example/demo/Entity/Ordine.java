@@ -14,6 +14,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@ToString
 public class Ordine implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,12 +26,12 @@ public class Ordine implements Serializable {
     @Column(name = "dataCreazione", nullable = false)
     private Date dataCreazione;
 
-    @ManyToOne(targetEntity = Fornitore.class)
+    @ManyToOne
     @JoinColumn(name = "fornitore")
     private Fornitore fornitore;
 
     @OneToMany(mappedBy = "ordine")
-    @ToString.Exclude
+    @JsonIgnore
     private List<R_PO> ordini;
 }
 

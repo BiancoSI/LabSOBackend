@@ -26,7 +26,7 @@ public class Fornitore implements Serializable {
     private String nome;
 
     @Column(name = "recapito", unique = true)
-    private long recapito;
+    private String recapito;
 
     @Column(name = "sede")
     private String sede;

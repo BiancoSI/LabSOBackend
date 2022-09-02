@@ -27,6 +27,11 @@ public class FornituraService {
         return ffr.findAll();
     }
 
+    @Transactional(readOnly = true)
+    public List<Fornitura> findByPiva(String piva){
+        return ffr.findByPk_Piva(piva);
+    }
+
     @Transactional
     public List<Fornitura>  addNewFornitura(List<Prodotto> list, String piva) throws Exception {
         if(!fr.existsById(piva))

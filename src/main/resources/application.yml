@@ -19,7 +19,7 @@ spring:
     init:
       platform: 'mysql'
 keycloak:
-  auth-server-url: 'http://localhost:8080/auth'
+  auth-server-url: 'http://localhost:8080'
   realm: 'serverbb'
   resource: 'login-app'
   public-client: 'true'
