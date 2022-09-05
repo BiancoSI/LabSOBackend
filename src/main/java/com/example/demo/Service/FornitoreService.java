@@ -2,8 +2,11 @@ package com.example.demo.Service;
 
 import com.example.demo.Entity.Fornitore;
 
+import com.example.demo.Entity.Ordine;
 import com.example.demo.Repository.FornitoreRepository;
 import com.example.demo.Repository.FornituraRepository;
+import com.example.demo.Repository.OrdineRepository;
+import com.example.demo.Repository.ProdottiOrdineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +20,11 @@ public class FornitoreService {
 
     @Autowired
     public FornituraRepository ffr;
+    @Autowired
+    private OrdineRepository or;
+
+    @Autowired
+    private ProdottiOrdineRepository rpo;
 
     @Transactional(readOnly = true)
     public List<Fornitore> findAll(){
@@ -44,6 +52,13 @@ public class FornitoreService {
     @Transactional
     public void deleteFornitore(String piva) {
         ffr.deleteByPk_Piva(piva);
+
+        List<Ordine> ordini= or.findByFornitore_Piva(piva);
+        for(Ordine o : ordini){
+            rpo.deleteByPk_IdOrdine(o.getId());
+        }
+        or.deleteByFornitore(fr.getReferenceById(piva));
+
         fr.deleteById(piva);
     }
 

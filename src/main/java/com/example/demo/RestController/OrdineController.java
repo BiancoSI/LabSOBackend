@@ -39,7 +39,7 @@ public class OrdineController {
         Ordine o = null;
         try {
             o = os.add_Ordine(ordine);
-        } catch (ProdottoInesistenteException | FornitoreNonExistException e ) {
+        } catch (Exception e ) {
             return new ResponseEntity<>(new ResponseMessage(e.getMessage()), HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(o, HttpStatus.OK);

@@ -38,7 +38,7 @@ public class OrdineService {
         return or.findAll();
     }
     @Transactional
-    public Ordine add_Ordine(ObjectOrdine o) throws FornitoreNonExistException, ProdottoInesistenteException {
+    public Ordine add_Ordine(ObjectOrdine o) throws Exception {
         if(!fr.existsById(o.piva))
             throw new FornitoreNonExistException("fornitore inesistente");
         Fornitore f = fr.getReferenceById(o.piva);
@@ -54,6 +54,9 @@ public class OrdineService {
         for(helpRPO p : o.list) {
             if (!pr.existsById(p.prodotto.getId()))
                 throw new ProdottoInesistenteException("Prodotto inesistente con Id " + p.prodotto.getId());
+            if(p.quantita <= 0){
+                throw new Exception("Quantita di un ordine non può essere minore di 0");
+            }
             PkRPO pk = new PkRPO();
             pk.setIdOrdine(justAdded.getId());
             pk.setIdProdotto(p.prodotto.getId());
