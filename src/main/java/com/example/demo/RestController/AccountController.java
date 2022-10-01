@@ -62,7 +62,7 @@ public class AccountController {
 
     @GetMapping("/prova")
     public ResponseEntity prova(){
-        return new ResponseEntity<ResponseMessage>(new ResponseMessage("Cuka Blyat"), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<ResponseMessage>(new ResponseMessage("Prova Errore"), HttpStatus.BAD_REQUEST);
     }
 
 }
