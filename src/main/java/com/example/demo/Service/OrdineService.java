@@ -2,7 +2,6 @@ package com.example.demo.Service;
 
 import com.example.demo.Entity.Fornitore;
 import com.example.demo.Entity.Ordine;
-import com.example.demo.Entity.Prodotto;
 import com.example.demo.Entity.R_PO.PkRPO;
 import com.example.demo.Entity.R_PO.R_PO;
 import com.example.demo.Repository.FornitoreRepository;
@@ -11,8 +10,8 @@ import com.example.demo.Repository.ProdottiOrdineRepository;
 import com.example.demo.Repository.ProdottoRepository;
 import com.example.demo.Supports.Exceptions.FornitoreNonExistException;
 import com.example.demo.Supports.Exceptions.ProdottoInesistenteException;
-import com.example.demo.Supports.ObjectOrdine;
-import com.example.demo.Supports.helpRPO;
+import com.example.demo.Supports.Objects.ObjectOrdine;
+import com.example.demo.Supports.Objects.helpRPO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

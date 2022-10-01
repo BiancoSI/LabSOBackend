@@ -1,10 +1,9 @@
 package com.example.demo.RestController;
 
 import com.example.demo.Entity.Fornitura.Fornitura;
-import com.example.demo.Entity.Prodotto;
 import com.example.demo.Service.FornituraService;
-import com.example.demo.Supports.ArrayProdotti;
-import com.example.demo.Supports.ResponseMessage;
+import com.example.demo.Supports.Objects.ArrayProdotti;
+import com.example.demo.Supports.Objects.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

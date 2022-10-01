@@ -1,4 +1,4 @@
-package com.example.demo.Supports;
+package com.example.demo.Supports.Objects;
 
 import com.example.demo.Entity.Prodotto;
 

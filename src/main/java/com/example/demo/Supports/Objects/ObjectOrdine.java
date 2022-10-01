@@ -1,7 +1,5 @@
-package com.example.demo.Supports;
+package com.example.demo.Supports.Objects;
 
-import com.example.demo.Entity.Prodotto;
-import com.example.demo.Entity.R_PO.R_PO;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

@@ -2,7 +2,7 @@ package com.example.demo.RestController;
 
 import com.example.demo.Entity.Prodotto;
 import com.example.demo.Service.ProdottoService;
-import com.example.demo.Supports.ResponseMessage;
+import com.example.demo.Supports.Objects.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

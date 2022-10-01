@@ -2,7 +2,7 @@ package com.example.demo.RestController;
 
 import com.example.demo.Entity.Fornitore;
 import com.example.demo.Service.FornitoreService;
-import com.example.demo.Supports.ResponseMessage;
+import com.example.demo.Supports.Objects.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,13 +20,14 @@ public class FornitoreController {
     }
 
     @PostMapping("/add-fornitore")
-    public ResponseEntity addNewFornitore(@RequestBody Fornitore f){
+    public ResponseEntity addNewFornitore(@RequestBody Fornitore f)  {
         Fornitore fo = null;
         try {
             fo = fs.addFornitore(f);
         } catch (Exception e) {
-            return new ResponseEntity<>(new ResponseMessage(e.getMessage()), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }
+
         return new ResponseEntity<>(fo, HttpStatus.OK);
     }
     @DeleteMapping("/delete-fornitore")

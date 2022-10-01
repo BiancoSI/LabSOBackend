@@ -22,4 +22,5 @@ keycloak:
   auth-server-url: 'http://localhost:8080'
   realm: 'serverbb'
   resource: 'login-app'
-  public-client: 'true'
+  credentials:
+    secret: '7wVAMswcLLguzGTPW3zCQV0hOIjIud1P'
