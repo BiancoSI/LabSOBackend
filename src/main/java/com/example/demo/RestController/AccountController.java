@@ -2,10 +2,7 @@ package com.example.demo.RestController;
 
 import com.auth0.jwt.JWT;
 import com.example.demo.Service.AccountService;
-import com.example.demo.Supports.Objects.LoginRequest;
-import com.example.demo.Supports.Objects.LogoutRequest;
-import com.example.demo.Supports.Objects.ResponseLogin;
-import com.example.demo.Supports.Objects.ResponseMessage;
+import com.example.demo.Supports.Objects.*;
 import kong.unirest.JsonNode;
 import kong.unirest.UnirestException;
 import kong.unirest.json.JSONObject;
@@ -60,9 +57,15 @@ public class AccountController {
         return new ResponseEntity<>(new ResponseMessage("Logout effettuato con successo"), HttpStatus.OK);
     }
 
-    @GetMapping("/prova")
-    public ResponseEntity prova(){
-        return new ResponseEntity<ResponseMessage>(new ResponseMessage("Prova Errore"), HttpStatus.BAD_REQUEST);
+    @PostMapping("/register/new-user")
+    public ResponseEntity add_user(@RequestBody User user){
+
+        try{
+            as.createUser(user);
+        }catch(UnirestException e){
+            return new ResponseEntity(new ResponseMessage("Errore nella registrazione dell'utente "), HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity("Creazione Avvenuta", HttpStatus.OK);
     }
 
 }

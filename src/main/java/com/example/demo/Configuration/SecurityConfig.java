@@ -59,7 +59,7 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
         http.addFilter(corsFilter());
         http.authorizeRequests()
                 .antMatchers("/admin/**").hasRole("admin")
-                .antMatchers("/account/logout").hasRole("user")
+                .antMatchers("**/account/logout").hasRole("user")
                 .anyRequest()
                 .permitAll();
     }

@@ -6,18 +6,20 @@ import kong.unirest.HttpResponse;
 import kong.unirest.JsonNode;
 import kong.unirest.Unirest;
 import kong.unirest.UnirestException;
+import kong.unirest.json.JSONObject;
+import org.keycloak.OAuth2Constants;
 import org.keycloak.admin.client.Keycloak;
+import org.keycloak.admin.client.KeycloakBuilder;
+import org.keycloak.admin.client.resource.UserResource;
 import org.keycloak.admin.client.resource.UsersResource;
 import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.ws.rs.core.Response;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Date;
-import java.util.concurrent.ExecutionException;
 
 @Service
 public class AccountService {
@@ -34,7 +36,6 @@ public class AccountService {
 
     public JsonNode login(String username, String password) throws UnirestException {
         String url = serverURL+"/realms/"+realm+"/protocol/openid-connect/token";
-
         HttpResponse<JsonNode> http = Unirest.post(url)
                 .header("Content-Type", "application/x-www-form-urlencoded")
                 .field("client_id", clientID)
@@ -75,17 +76,36 @@ public class AccountService {
         return http.getBody();
     }
 
-    public JsonNode createUser(User user){
+    public void createUser(User user){
         UsersResource us = this.keycloak.realm(realm).users();
         CredentialRepresentation cr = setPassword(user.getPassword());
 
         UserRepresentation kuser = new UserRepresentation();
         kuser.setEmail(user.getEmail());
-        kuser.setFirstName(user.getName());
-        kuser.setLastName(user.getSurname());
+        kuser.setFirstName(user.getFirstName());
+        kuser.setLastName(user.getLastName());
         kuser.setUsername(user.getUsername());
         kuser.setCredentials(Collections.singletonList(cr));
-        return (JsonNode) us.create(kuser).getEntity();
+        kuser.setEnabled(true);
+        Response response = us.create(kuser);
+        /*
+        String[] path = response.getLocation().toString().split("/");
+        String id = path[path.length-1];
+        us.get(id).logout();
+         */
+        /*
+        Keycloak key= KeycloakBuilder.builder()
+                .serverUrl(serverURL)
+                .grantType(OAuth2Constants.PASSWORD)
+                .realm(realm)
+                .clientId(clientID)
+                .clientSecret(clientSecret)
+                .username(kuser.getUsername())
+                .password(user.getPassword()).build();
+        String refresh =key.tokenManager().getAccessToken().getRefreshToken();
+        String access_token =  key.tokenManager().getAccessToken().getToken();
+        logout(refresh, access_token);
+        */
     }
 
     private CredentialRepresentation setPassword(String password){

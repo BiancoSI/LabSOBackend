@@ -24,9 +24,7 @@ public class RequestKeycloak {
     private static String authUrl = "http://localhost:8080/";
 
     private static String realm = "serverbb";
-
-    @Value("${keycloak.credentials.secret}")
-    private static String secret;
+    private static String secret = "7wVAMswcLLguzGTPW3zCQV0hOIjIud1P";
 
     @Bean
     public Keycloak keycloak() {
